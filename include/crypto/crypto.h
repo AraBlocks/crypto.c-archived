@@ -22,7 +22,7 @@ void
 crpt_rand_bytes(void ** const sbuffer, cint size);
 
 cchar*
-crpt_discovery_key(hash_fn_t fn, cchar *key);
+crpt_discovery_key(hash_fn_t fn, cchar *key, clong key_length);
 
 cchar*
 crpt_encode_big_endian(unsigned long long num);

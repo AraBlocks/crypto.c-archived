@@ -54,13 +54,16 @@ crpt_rand_bytes(void ** const buffer, cint size) {
 }
 
 cchar*
-crpt_discovery_key(hash_fn_t fn, cchar *key) {
+crpt_discovery_key(hash_fn_t fn, cchar *key, clong key_length) {
   if (sodium_init() >= 0) {
     if (BLAKE2B == fn) {
-      
+      static cchar digest[crypto_generichash_BYTES]; // should make 32 a const somewhere
+      cchar *umecore = (cchar *) "UMECORE";
+      crypto_generichash(digest, sizeof digest, umecore, 7, key, key_length);
+      return digest;
     }
   }
-  // sodium.crypto_generichash //blake2b
+  return 0;
 }
 
 cchar*
